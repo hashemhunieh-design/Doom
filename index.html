@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS4 CLOUD SYSTEM v13.04</title>
+    <style>
+        /* تصميم الواجهة - يشبه نظام البلايستيشن */
+        body { background: #000; color: #fff; font-family: 'Segoe UI', sans-serif; margin: 0; overflow: hidden; }
+        .bg-glow { position: fixed; top: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #001f3f 0%, #000 80%); z-index: -1; }
+        
+        header { padding: 30px; text-align: center; border-bottom: 1px solid #00d4ff; }
+        h1 { margin: 0; font-size: 28px; letter-spacing: 2px; color: #00d4ff; text-shadow: 0 0 10px #00d4ff; }
+
+        .menu { display: flex; flex-direction: column; align-items: center; padding: 40px; }
+        
+        .btn { 
+            background: rgba(255,255,255,0.05); border: 1px solid #00d4ff; color: #fff;
+            padding: 20px 40px; margin: 10px; width: 80%; max-width: 500px;
+            border-radius: 10px; cursor: pointer; font-size: 18px; transition: 0.3s;
+            text-align: left; position: relative;
+        }
+        .btn:hover { background: #00d4ff; color: #000; box-shadow: 0 0 20px #00d4ff; }
+        .btn span { float: right; opacity: 0.5; }
+
+        /* منطقة اللعبة */
+        #gameOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 100; }
+        iframe { width: 100%; height: calc(100% - 50px); border: none; }
+        .back-btn { background: #ff0000; color: #fff; padding: 10px; width: 100%; border: none; font-weight: bold; cursor: pointer; }
+
+        .footer-info { position: fixed; bottom: 10px; width: 100%; text-align: center; font-size: 12px; color: #444; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <header>
+        <h1>PS4 PRIVATE HOST</h1>
+        <p style="color: #888;">System Version: 13.04 | Device: PlayStation®4</p>
+    </header>
+
+    <div class="menu" id="mainMenu">
+        <div class="btn" onclick="openGame('https://reallifepy.github.io/doom/')">
+            🎮 Play DOOM Classic <span>Launch App</span>
+        </div>
+
+        <div class="btn" style="border-color: #ffcc00;" onclick="triggerJailbreak()">
+            🚀 GoldHEN v3.0 (Sim) <span>9.00 / 11.00 / 13.04</span>
+        </div>
+
+        <div class="btn" onclick="location.href='https://www.google.com'">
+            🌐 Web Browser <span>Open Google</span>
+        </div>
+    </div>
+
+    <div id="gameOverlay">
+        <button class="back-btn" onclick="closeGame()">CLOSE GAME / العودة للقائمة</button>
+        <iframe id="gameIframe" src=""></iframe>
+    </div>
+
+    <div class="footer-info">Developed for Private Use | 2026 Edition</div>
+
+    <script>
+        function openGame(url) {
+            document.getElementById('gameOverlay').style.display = 'block';
+            document.getElementById('gameIframe').src = url;
+            // تذكير بالتحكم
+            setTimeout(() => {
+                alert("للتحكم باللعبة:\nاستخدم الأسهم للحركة و زر X للضرب.\nاضغط زر R3 لتكبير الشاشة.");
+            }, 1000);
+        }
+
+        function closeGame() {
+            document.getElementById('gameOverlay').style.display = 'none';
+            document.getElementById('gameIframe').src = "";
+        }
+
+        function triggerJailbreak() {
+            alert("Scanning System... v13.04 Found.\n\n[ACTION REQUIRED]: Insert USB Drive to Port 1.");
+            setTimeout(() => {
+                alert("USB Not Recognized.\nReason: GoldHEN payload not yet signed for 13.04 Kernel.\n\nKeep your device on 13.04 and wait for updates.");
+            }, 2000);
+        }
+
+        // كود لتحسين استجابة يد التحكم
+        window.addEventListener("gamepadconnected", (event) => {
+            console.log("Gamepad connected at index %d: %s. %d buttons, %d axes.",
+            event.gamepad.index, event.gamepad.id,
+            event.gamepad.buttons.length, event.gamepad.axes.length);
+        });
+    </script>
+</body>
+</html>
